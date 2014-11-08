@@ -3,6 +3,11 @@
 defined('LOCAL_PATH_BOOTSTRAP') || define("LOCAL_PATH_BOOTSTRAP", __DIR__);
 
 // ---------------------------------------------------------------------------
+// DEFINE SEPERATOR ALIASES
+// ---------------------------------------------------------------------------
+defined('URL_SEPARATOR') || define("URL_SEPARATOR", '/');
+
+// ---------------------------------------------------------------------------
 // DEFINE ROOT PATHS
 // ---------------------------------------------------------------------------
 define("RELATIVE_PATH_ROOT", '');
@@ -42,17 +47,31 @@ define("LOCAL_PATH_ASSET_JS", LOCAL_PATH_ROOT . RELATIVE_PATH_ASSET_JS);
 // ---------------------------------------------------------------------------
 // DEFINE URL PATHS
 // ---------------------------------------------------------------------------
-define("HTTP_PATH_BASE", HTTP_PATH_ROOT . RELATIVE_PATH_BASE);
-define("HTTP_PATH_APP", HTTP_PATH_ROOT . RELATIVE_PATH_APP);
-define("HTTP_PATH_LIBRARY", false);
-define("HTTP_PATH_HELPERS", false);
-define("HTTP_PATH_TEMPLATE", false);
-define("HTTP_PATH_CONFIG", false);
-define("HTTP_PATH_PAGES", false);
-define("HTTP_PATH_ASSET", HTTP_PATH_ROOT . RELATIVE_PATH_ASSET);
-define("HTTP_PATH_ASSET_IMG", HTTP_PATH_ROOT . RELATIVE_PATH_ASSET_IMG);
-define("HTTP_PATH_ASSET_CSS", HTTP_PATH_ROOT . RELATIVE_PATH_ASSET_CSS);
-define("HTTP_PATH_ASSET_JS", HTTP_PATH_ROOT . RELATIVE_PATH_ASSET_JS);
+if (URL_SEPARATOR === DIRECTORY_SEPARATOR) {
+    define("HTTP_PATH_BASE", HTTP_PATH_ROOT . RELATIVE_PATH_BASE);
+    define("HTTP_PATH_APP", HTTP_PATH_ROOT . RELATIVE_PATH_APP);
+    define("HTTP_PATH_LIBRARY", false);
+    define("HTTP_PATH_HELPERS", false);
+    define("HTTP_PATH_TEMPLATE", false);
+    define("HTTP_PATH_CONFIG", false);
+    define("HTTP_PATH_PAGES", false);
+    define("HTTP_PATH_ASSET", HTTP_PATH_ROOT . RELATIVE_PATH_ASSET);
+    define("HTTP_PATH_ASSET_IMG", HTTP_PATH_ROOT . RELATIVE_PATH_ASSET_IMG);
+    define("HTTP_PATH_ASSET_CSS", HTTP_PATH_ROOT . RELATIVE_PATH_ASSET_CSS);
+    define("HTTP_PATH_ASSET_JS", HTTP_PATH_ROOT . RELATIVE_PATH_ASSET_JS);
+} else {
+    define("HTTP_PATH_BASE", HTTP_PATH_ROOT . str_replace(DIRECTORY_SEPARATOR, URL_SEPARATOR, RELATIVE_PATH_BASE));
+    define("HTTP_PATH_APP", HTTP_PATH_ROOT . str_replace(DIRECTORY_SEPARATOR, URL_SEPARATOR, RELATIVE_PATH_APP));
+    define("HTTP_PATH_LIBRARY", false);
+    define("HTTP_PATH_HELPERS", false);
+    define("HTTP_PATH_TEMPLATE", false);
+    define("HTTP_PATH_CONFIG", false);
+    define("HTTP_PATH_PAGES", false);
+    define("HTTP_PATH_ASSET", HTTP_PATH_ROOT . str_replace(DIRECTORY_SEPARATOR, URL_SEPARATOR, RELATIVE_PATH_ASSET));
+    define("HTTP_PATH_ASSET_IMG", HTTP_PATH_ROOT . str_replace(DIRECTORY_SEPARATOR, URL_SEPARATOR, RELATIVE_PATH_ASSET_IMG));
+    define("HTTP_PATH_ASSET_CSS", HTTP_PATH_ROOT . str_replace(DIRECTORY_SEPARATOR, URL_SEPARATOR, RELATIVE_PATH_ASSET_CSS));
+    define("HTTP_PATH_ASSET_JS", HTTP_PATH_ROOT . str_replace(DIRECTORY_SEPARATOR, URL_SEPARATOR, RELATIVE_PATH_ASSET_JS));
+}
 
 // ---------------------------------------------------------------------------
 // DEFINE REQUEST PARAMETERS
@@ -68,8 +87,8 @@ define("REQUEST_PATH_STRIP_QUERY", REQUEST_QUERY ? str_replace('?' . REQUEST_QUE
 // DEFINE SITE PARAMETERS
 // ---------------------------------------------------------------------------
 define("PRODUCTION", false);
-define("PAGE_PATH_DEFAULT", DIRECTORY_SEPARATOR . 'index');
-define("PAGE_PATH", (REQUEST_PATH_STRIP_QUERY === DIRECTORY_SEPARATOR) ? PAGE_PATH_DEFAULT : REQUEST_PATH_STRIP_QUERY);
+define("PAGE_PATH_DEFAULT", URL_SEPARATOR . 'index');
+define("PAGE_PATH", (REQUEST_PATH_STRIP_QUERY === URL_SEPARATOR) ? PAGE_PATH_DEFAULT : REQUEST_PATH_STRIP_QUERY);
 
 // ---------------------------------------------------------------------------
 // INITIALIZE AUTOLOADER
