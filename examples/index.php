@@ -39,7 +39,7 @@ if(isset($_GET['output']) && strtolower($_GET['output']) == 'json') {
                 <div class="col">
                     <div class="cell pipes">
                         <ul class="nav">
-                            <li>Powered by <a target="_blank" href="http://www.johnslegers.com">Cascade Framework</a></li>
+                            <li>Powered by <a target="_blank" href="http://www.cascade-framework.com">Cascade Framework</a></li>
                         </ul>
                     </div>
                 </div>
